@@ -10,7 +10,6 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import NewServices from "@/components/NewServices";
-import TestPage from "@/app/services/test/page";
 
 export default function Home() {
   return (
@@ -18,7 +17,6 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <TestPage />
         <About />
         <NewServices />
         <Process />
