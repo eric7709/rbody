@@ -1,6 +1,6 @@
-import { MessageCircle, Phone, MapPin, Clock } from "lucide-react";
+import { MessageCircle, Phone, MapPin, Clock, Mail } from "lucide-react";
 import { site, services, waLink } from "@/lib/content";
-import { FaInstagram, FaFacebook, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -18,8 +18,9 @@ export default function Footer() {
               body sculpting, and medical weight-loss support in Lagos.
             </p>
             <div className="flex gap-3 pt-2">
+              {/* Instagram */}
               <a
-                href={`https://instagram.com/${site.instagram?.replace('@', '') || ''}`}
+                href="https://instagram.com/rbody_clinic"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -27,6 +28,30 @@ export default function Footer() {
               >
                 <FaInstagram size={16} />
               </a>
+
+              {/* TikTok */}
+              <a
+                href="https://tiktok.com/@rbody_clinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
+              >
+                <FaTiktok size={15} />
+              </a>
+
+              {/* Facebook */}
+              <a
+                href="https://web.facebook.com/people/Rbody-Clinic/61580775179104"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
+              >
+                <FaFacebook size={16} />
+              </a>
+
+              {/* WhatsApp Quick Link */}
               <a
                 href={waLink()}
                 target="_blank"
@@ -35,27 +60,6 @@ export default function Footer() {
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
               >
                 <MessageCircle size={16} />
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
-              >
-                <FaFacebook size={16} />
-              </a>
-              <a
-                href="#"
-                aria-label="YouTube"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
-              >
-                <FaYoutube size={16} />
-              </a>
-              <a
-                href="#"
-                aria-label="Twitter"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/40 hover:border-[#CDB7C8] hover:text-[#CDB7C8] hover:bg-[#CDB7C8]/10 transition-all"
-              >
-                <FaTwitter size={16} />
               </a>
             </div>
           </div>
@@ -105,7 +109,6 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-
             </ul>
           </div>
 
@@ -121,9 +124,18 @@ export default function Footer() {
                   className="flex items-start gap-3 text-sm text-white/50 transition-colors hover:text-[#CDB7C8]"
                 >
                   <Phone size={15} className="text-[#CDB7C8] shrink-0 mt-0.5" />
-                  <span>{site.whatsappDisplay}</span>
+                  <span>{site.whatsappNumber}</span>
                 </a>
               </li> 
+              <li>
+                <a
+                  href="mailto:rclinicpostop@gmail.com"
+                  className="flex items-start gap-3 text-sm text-white/50 transition-colors hover:text-[#CDB7C8]"
+                >
+                  <Mail size={15} className="text-[#CDB7C8] shrink-0 mt-0.5" />
+                  <span>rclinicpostop@gmail.com</span>
+                </a>
+              </li>
               <li>
                 <div className="flex items-start gap-3 text-sm text-white/50">
                   <MapPin size={15} className="text-[#CDB7C8] shrink-0 mt-0.5" />

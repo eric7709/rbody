@@ -19,13 +19,13 @@ export default function Header() {
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll behavior (hero visibility + reveal on scroll up)
+  // Handle scroll behavior
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const heroThreshold = window.innerHeight; // 100vh
+      const heroThreshold = window.innerHeight;
 
       setScrolled(currentScrollY > 40);
 
@@ -44,18 +44,26 @@ export default function Header() {
 
   // Lock body scroll when mobile drawer is open
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "unset";
+    if (open) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "unset";
+      document.body.style.touchAction = "auto";
+    }
   }, [open]);
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 p-4 transition-all duration-500 ease-in-out md:p-4 ${
-        visible || open ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        visible || open
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-full opacity-0 pointer-events-none"
       }`}
     >
       {/* Floating Header Capsule */}
       <div
-        className={`mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 md:px-6 md:py-3 ${
+        className={`relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 md:px-6 md:py-3 ${
           scrolled
             ? "border-[#CDB7C8]/40 bg-white/85 shadow-[0_8px_32px_rgba(139,111,134,0.12)] backdrop-blur-xl"
             : "border-[#CDB7C8]/25 bg-white/70 backdrop-blur-md"
@@ -115,9 +123,10 @@ export default function Header() {
 
           {/* Mobile Hamburger Toggle */}
           <button
-            onClick={() => setOpen(!open)}
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors hover:bg-[#8B6F86] hover:text-white md:hidden"
+            className="relative z-50 flex h-10 w-10 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors hover:bg-[#8B6F86] hover:text-white active:bg-[#8B6F86] active:text-white md:hidden"
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -126,7 +135,7 @@ export default function Header() {
 
       {/* Full-Screen Mobile Drawer */}
       <div
-        className={`fixed inset-0 top-[88px] z-40 flex flex-col justify-between border-t border-[#CDB7C8]/20 bg-white/95 px-6 py-8 backdrop-blur-2xl transition-all duration-500 md:hidden ${
+        className={`fixed inset-0 z-40 flex h-screen w-screen flex-col justify-between bg-white/98 px-6 pb-8 pt-24 backdrop-blur-2xl transition-all duration-300 md:hidden ${
           open
             ? "pointer-events-auto opacity-100 translate-y-0"
             : "pointer-events-none opacity-0 -translate-y-4"

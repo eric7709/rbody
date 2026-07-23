@@ -33,7 +33,7 @@ export const beforeAfter: BeforeAfterItem[] = [
     title: "Lipolysis Treatment",
     meta: "6 sessions (Result 1)",
     image:
-      "https://res.cloudinary.com/ddagbflm8/image/upload/v1784723534/rbody2_y3usnt.jpg",
+      "https://res.cloudinary.com/ddagbflm8/image/upload/v1784783000/WhatsApp_Image_2026-07-23_at_04.58.52_b0xoim.jpg",
   },
   {
     title: "Lipolysis Treatment",

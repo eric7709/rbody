@@ -17,7 +17,7 @@ export default function Contact() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Clean phone number so tel: links parse correctly across all browsers & OS
-  const cleanPhone = site.whatsappNumber ? site.whatsappNumber.replace(/\D/g, "") : "";
+  const cleanPhone = "+2347074170795";
 
   // Close dropdown when clicking outside
   useEffect(() => {

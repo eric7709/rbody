@@ -2,13 +2,13 @@ export const site = {
   name: "Rbody",
   fullName: "Rbody Clinic",
   tagline: "Lagos's Recovery & Body Clinic",
-  whatsappNumber: "2340000000000",
+  whatsappNumber: "+2347074170795",
   whatsappDisplay: "+234 000 000 0000",
-  address: "[Street Address], Lagos, Nigeria",
-  instagram: "@rbody",
+  address: "Adedeji Adekola Street, Lekki Phase 1, Lagos, Nigeria",
+  instagram: "@rbody_clinic",
   hours: [
-    { days: "Mon – Sat", time: "9:00 AM – 7:00 PM" },
-    { days: "Sunday", time: "Closed" },
+    { days: "Mon – Sat", time: "8:00 AM – 5:00 PM" },
+    { days: "Sunday", time: "12pm - 5pm" },
   ],
 };
 
