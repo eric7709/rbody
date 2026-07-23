@@ -13,8 +13,7 @@ export const site = {
 };
 
 export const waLink = (message?: string) =>
-  `https://wa.me/${site.whatsappNumber}${
-    message ? `?text=${encodeURIComponent(message)}` : ""
+  `https://wa.me/${site.whatsappNumber}${message ? `?text=${encodeURIComponent(message)}` : ""
   }`;
 
 export type Service = {
@@ -258,9 +257,17 @@ export const galleryItems = [
   { label: "Clinic Entrance", icon: "door" },
   { label: "Massage Session", icon: "hand" },
   { label: "Treatment Room", icon: "sofa" },
-  { label: "Client Session", icon: "camera" },
+  {
+    label: "Client Session",
+    icon: "camera",
+    video: "/one.mp4"
+  },
   { label: "IV Therapy Setup", icon: "droplet" },
-  { label: "Process Video", icon: "video" },
+  {
+    label: "Process Video",
+    icon: "video",
+    video: "/two.mp4"
+  },
 ] as const;
 
 export const beforeAfter = [

@@ -11,7 +11,7 @@ import "@fontsource/work-sans/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rbody Clinic — Body Clinic & Recovery in Lagos",
+  title: "Rbody Clinic — Lymphatic Drainage, Body Sculpting & Recovery Care",
   description:
     "Rbody is a specialist clinic for lymphatic drainage massage, post-surgical recovery care, body sculpting, lipolysis, IV therapy and medical weight-loss support in Lagos.",
 };

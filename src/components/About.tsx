@@ -59,11 +59,11 @@ export default function About() {
               <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-[#333333]/85 to-transparent p-6">
                 <div className="flex items-center justify-between text-white">
                   <div>
-                    <p className="font-display text-2xl font-bold">2024</p>
+                    <p className="font-display text-2xl font-bold">2019</p>
                     <p className="text-xs opacity-70">Founded in Lagos</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-display text-2xl font-bold">500+</p>
+                    <p className="font-display text-2xl font-bold">700+</p>
                     <p className="text-xs opacity-70">Happy clients</p>
                   </div>
                 </div>
@@ -116,7 +116,7 @@ export default function About() {
                 <div>
                   <p className="text-xs font-medium text-[#333333]">Trusted care</p>
                   <p className="text-[10px] text-[#333333]/50">
-                    500+ clients served
+                    700+ clients served
                   </p>
                 </div>
               </div>
