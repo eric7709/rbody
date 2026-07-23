@@ -48,7 +48,7 @@ export default function LymphaticDrainagePage() {
         </section>
 
         <section className="bg-sand">
-          <SectionWave tone="ivory" flip />
+          <SectionWave flip />
           <div className="mx-auto max-w-4xl px-6 pb-16 pt-2">
             <h2 className="font-display text-2xl text-ink">Benefits</h2>
             <ul className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
