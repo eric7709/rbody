@@ -135,7 +135,7 @@ export default function Header() {
 
       {/* Full-Screen Mobile Drawer */}
       <div
-        className={`fixed inset-0 z-40 flex h-screen w-screen flex-col justify-between bg-white/98 px-6 pb-8 pt-24 backdrop-blur-2xl transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 flex h-screen w-screen flex-col justify-between bg-white/98 px-5 pb-8 pt-24 backdrop-blur-2xl transition-all duration-300 md:hidden ${
           open
             ? "pointer-events-auto opacity-100 translate-y-0"
             : "pointer-events-none opacity-0 -translate-y-4"
