@@ -9,7 +9,7 @@ export default function Services() {
     <section id="services" className="relative bg-[#F8EDEF] py-20 md:py-28">
       <SectionWave tone="white" flip />
 
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-6xl pt-10 px-4">
         {/* Header Section */}
         <div className="mx-auto max-w-2xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-1.5 backdrop-blur-sm">
@@ -29,7 +29,7 @@ export default function Services() {
         </div>
 
         {/* Services List Grid */}
-        <div className="mt-16 space-y-6">
+        <div className="mt-16  space-y-6">
           {services.map((service: Service, i: number) => (
             <div
               key={service.slug}
