@@ -6,7 +6,7 @@ export const services: Service[] = [
     name: "Lymphatic Drainage Massage",
     price: "₦70,000 per session",
     bestFor: "Post-operative recovery, bloating, fluid retention, and general lymphatic wellness.",
-    description: "Lymphatic Drainage Massage is a specialized, gentle therapeutic technique designed to stimulate the lymphatic system, helping your body naturally eliminate excess fluid, waste products, and toxins. Unlike traditional massage, this treatment uses light, rhythmic, and precise hand movements that follow the natural direction of the lymphatic system, encouraging the flow of lymph fluid throughout the body. This technique is particularly beneficial for post-operative recovery, as it helps reduce swelling, soften fibrosis, and promote faster healing. It's also highly effective for individuals dealing with water retention, bloating, or those simply looking to support their body's natural detoxification processes and overall wellbeing.",
+    description: "Recover, heal, and feel your best with our specialized lymphatic drainage massage. Whether you’re recovering from cosmetic surgery, a C-section, or experiencing bloating and fluid retention, this gentle treatment helps reduce swelling, improve circulation, encourage natural lymphatic drainage, and support a smoother, more comfortable recovery.",
     benefits: [
       "Reduces swelling and inflammation throughout the body",
       "Helps soften fibrosis and scar tissue after surgery",
