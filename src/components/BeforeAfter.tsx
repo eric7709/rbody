@@ -5,7 +5,7 @@ import { beforeAfter } from "@/lib/beforeAfter";
 export default function BeforeAfter() {
   return (
     <section id="results" className="relative bg-[#F8EDEF] py-16 md:py-24">
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-5xl px-4">
         {/* Header */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
           <p className="eyebrow mb-3 text-xs font-semibold uppercase tracking-widest text-[#8B6F86]">

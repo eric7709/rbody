@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer className="bg-[#333333] text-white/60 border-t border-white/5">
-      <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+      <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         {/* Main Footer Grid */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}

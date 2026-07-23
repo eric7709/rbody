@@ -62,7 +62,7 @@ ${message}
     <section id="contact" className="relative overflow-hidden bg-[#F8EDEF]">
       <SectionWave tone="white" flip />
 
-      <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
+      <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
             <p className="eyebrow mb-4 text-[#8B6F86]">Contact</p>

@@ -18,7 +18,7 @@ export default function ProcessTimeline() {
     >
       <SectionWave tone="blush" flip />
 
-      <div className="relative mx-auto max-w-4xl py-5 px-6">
+      <div className="relative mx-auto max-w-4xl py-5 px-4">
         {/* Header */}
         <div className="mx-auto mb-16 max-w-lg text-center">
           <p className="eyebrow mb-3 text-xs font-semibold uppercase tracking-widest text-[#8B6F86]">

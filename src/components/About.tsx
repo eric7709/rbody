@@ -30,7 +30,7 @@ export default function About() {
       <div className="absolute left-0 top-0 h-1/2 w-1/3 rounded-full bg-white/60 blur-3xl" />
       <div className="absolute bottom-0 right-0 h-1/3 w-1/4 rounded-full bg-[#8B6F86]/5 blur-3xl" />
       <SectionWave tone="blush" flip />
-      <div className="relative mx-auto max-w-6xl px-6">
+      <div className="relative mx-auto max-w-6xl px-4">
         {/* Header */}
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <p className="eyebrow mb-3 text-[#8B6F86]">About Rbody</p>

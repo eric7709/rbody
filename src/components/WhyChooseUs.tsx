@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
 
       <SectionWave tone="white" flip />
 
-      <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-10 md:pb-28">
+      <div className="relative mx-auto max-w-6xl px-4 pb-20 pt-10 md:pb-28">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>

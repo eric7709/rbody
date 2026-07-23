@@ -5,7 +5,7 @@ export default function Testimonials() {
   const [featured, ...rest] = testimonials;
 
   return (
-    <section className="mx-auto max-w-6xl bg-white px-6 py-20 md:py-28">
+    <section className="mx-auto max-w-6xl bg-white px-4 py-20 md:py-28">
       <p className="eyebrow mb-4 text-[#8B6F86]">Client Love</p>
       <h2 className="font-display text-3xl leading-tight text-[#333333] sm:text-4xl">
         What our clients say

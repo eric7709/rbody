@@ -9,7 +9,7 @@ export default function Services() {
     <section id="services" className="relative bg-[#F8EDEF] py-20 md:py-28">
       <SectionWave tone="white" flip />
 
-      <div className="mx-auto max-w-6xl py-10 px-6">
+      <div className="mx-auto max-w-6xl py-10 px-4">
         {/* Header Section */}
         <div className="mx-auto max-w-2xl text-center">
           <p className="eyebrow mb-3 text-xs font-semibold uppercase tracking-widest text-[#8B6F86]">

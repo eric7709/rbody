@@ -21,7 +21,7 @@ const tones = [
 
 export default function Gallery() {
   return (
-    <section id="gallery" className="mx-auto max-w-6xl bg-white px-6 py-20 md:py-28">
+    <section id="gallery" className="mx-auto max-w-6xl bg-white px-4 py-20 md:py-28">
       <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <p className="eyebrow mb-4 text-[#8B6F86]">Gallery</p>
