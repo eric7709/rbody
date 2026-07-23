@@ -134,8 +134,7 @@ export default function Header() {
             </Link>
 
             {/* Mobile Hamburger Toggle */}
-            <button
-              type="button"
+            <div
               onClick={() => setOpen((prev) => !prev)}
               onTouchEnd={(e) => {
                 // Belt-and-suspenders for iOS Safari: some WebKit versions
@@ -153,7 +152,7 @@ export default function Header() {
               className="relative z-50 flex h-10 w-10 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors will-change-transform hover:bg-[#8B6F86] hover:text-white active:bg-[#8B6F86] active:text-white md:hidden"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            </div>
           </div>
         </div>
       </header>

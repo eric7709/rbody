@@ -89,7 +89,7 @@ ${message}
 
               {/* Fixed Call Link */}
               <a
-                href={cleanPhone ? `tel:+${cleanPhone}` : "#"}
+                href={cleanPhone ? `tel:${cleanPhone}` : "#"}
                 className="inline-flex items-center justify-center gap-3 rounded-full border border-[#8B6F86]/30 px-6 py-3 text-sm font-medium text-[#333333] transition hover:border-[#8B6F86] hover:text-[#8B6F86]"
               >
                 <Phone size={17} />
