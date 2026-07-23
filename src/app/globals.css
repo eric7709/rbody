@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+html, body {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+:root {
+  --ink: #333333;
+  --ink-soft: #6b5a63;
+  --ivory: #ffffff;
+  --surface: #fffdff;
+  --clay: #a98fa0;
+  --clay-deep: #332633;
+  --terracotta: #8b6f86;
+  --terracotta-soft: #cdb7c8;
+  --sand: #f6e3ea;
+  --line: #dcc0d1;
+  --line-on-dark: rgba(255, 255, 255, 0.16);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ivory: var(--ivory);
+  --color-surface: var(--surface);
+  --color-clay: var(--clay);
+  --color-clay-deep: var(--clay-deep);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-soft: var(--terracotta-soft);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+  --color-line-on-dark: var(--line-on-dark);
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: "Work Sans", sans-serif;
+}
+
+.font-display {
+  font-family: "Fraunces", serif;
+  font-optical-sizing: auto;
+}
+
+.eyebrow {
+  font-family: "Work Sans", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
