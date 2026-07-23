@@ -74,7 +74,8 @@ export default function Header() {
       >
         {/* Floating Header Capsule */}
         <div
-          className={`relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 md:px-6 md:py-3 ${
+          style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)" }}
+          className={`relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 will-change-transform md:px-6 md:py-3 ${
             scrolled
               ? "border-[#CDB7C8]/40 bg-white/85 shadow-[0_8px_32px_rgba(139,111,134,0.12)] backdrop-blur-xl"
               : "border-[#CDB7C8]/25 bg-white/70 backdrop-blur-md"
@@ -136,9 +137,20 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((prev) => !prev)}
+              onTouchEnd={(e) => {
+                // Belt-and-suspenders for iOS Safari: some WebKit versions
+                // drop the synthesized click event for elements nested
+                // inside a backdrop-filter/blur ancestor. Firing the
+                // toggle directly off touchend guarantees the tap is
+                // never lost, while preventDefault stops it from also
+                // firing a delayed/duplicate click afterward.
+                e.preventDefault();
+                setOpen((prev) => !prev);
+              }}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="relative z-50 flex h-10 w-10 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors hover:bg-[#8B6F86] hover:text-white active:bg-[#8B6F86] active:text-white md:hidden"
+              style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)" }}
+              className="relative z-50 flex h-10 w-10 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors will-change-transform hover:bg-[#8B6F86] hover:text-white active:bg-[#8B6F86] active:text-white md:hidden"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
