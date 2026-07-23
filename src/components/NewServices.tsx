@@ -12,12 +12,9 @@ export default function Services() {
       <div className="mx-auto max-w-6xl pt-10 px-4">
         {/* Header Section */}
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/60 px-4 py-1.5 backdrop-blur-sm">
-            <Sparkles size={14} className="text-[#8B6F86]" />
-            <span className="text-[11px] font-medium uppercase tracking-widest text-[#8B6F86]">
+            <span className="text-[11px] font-medium uppercase tracking-widest text-black">
               Our Offerings
             </span>
-          </div>
           <h2 className="mt-6 font-display text-3xl font-medium leading-tight text-[#333333] sm:text-4xl">
             Tailored Treatments & <br className="hidden sm:block" />
             <span className="text-[#8B6F86]">Luxury Care</span>

@@ -260,13 +260,11 @@ export const galleryItems = [
   {
     label: "Client Session",
     icon: "camera",
-    video: "/one.mp4"
   },
   { label: "IV Therapy Setup", icon: "droplet" },
   {
     label: "Process Video",
     icon: "video",
-    video: "/two.mp4"
   },
 ] as const;
 
