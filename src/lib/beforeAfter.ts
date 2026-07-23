@@ -35,11 +35,4 @@ export const beforeAfter: BeforeAfterItem[] = [
     image:
       "https://res.cloudinary.com/ddagbflm8/image/upload/v1784783000/WhatsApp_Image_2026-07-23_at_04.58.52_b0xoim.jpg",
   },
-  {
-    title: "Lipolysis Treatment",
-    meta: "6 sessions (Result 2)",
-    image:
-      "https://res.cloudinary.com/ddagbflm8/image/upload/v1784723534/rbody3_v4wbbg.jpg",
-  },
-
 ];

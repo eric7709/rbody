@@ -10,7 +10,7 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import NewServices from "@/components/NewServices";
-import TestPage from "@/components/TestPage";
+import TestPage from "@/app/services/test/page";
 
 export default function Home() {
   return (
