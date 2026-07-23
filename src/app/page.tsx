@@ -10,11 +10,12 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import NewServices from "@/components/NewServices";
+import Header2 from "@/components/Header2";
 
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header2 />
       <main className="flex-1">
         <Hero />
         <About />
