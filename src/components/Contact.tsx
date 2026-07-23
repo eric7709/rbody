@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState, useRef, useEffect } from "react";
-import { Clock, MapPin, MessageCircle, Phone, ChevronDown, Check } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone, ChevronDown, Check, Calendar } from "lucide-react";
 
 import { site, waLink } from "@/lib/content";
 
@@ -16,10 +16,8 @@ export default function Contact() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Clean phone number so tel: links parse correctly across all browsers & OS
   const cleanPhone = "+2347074170795";
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -38,7 +36,14 @@ export default function Contact() {
     const name = form.get("name")?.toString() || "";
     const phone = form.get("phone")?.toString() || "";
     const treatment = selectedTreatment;
+    const date = form.get("date")?.toString() || "";
+    const time = form.get("time")?.toString() || "";
     const message = form.get("message")?.toString() || "";
+
+    const preferredDateTime =
+      date || time
+        ? `${date ? new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : ""}${date && time ? " at " : ""}${time || ""}`
+        : "No preference";
 
     const text = `
 Hi Rbody, I'd like to book a consultation.
@@ -46,6 +51,7 @@ Hi Rbody, I'd like to book a consultation.
 Name: ${name}
 Phone: ${phone}
 Treatment: ${treatment}
+Preferred Date/Time: ${preferredDateTime}
 
 Message:
 ${message}
@@ -57,6 +63,9 @@ ${message}
   const instagramHref = site.instagram
     ? `https://instagram.com/${site.instagram.replace("@", "")}`
     : "#";
+
+  // Prevent selecting a date in the past
+  const todayISO = new Date().toISOString().split("T")[0];
 
   return (
     <section id="contact" className="relative overflow-hidden bg-[#F8EDEF]">
@@ -87,7 +96,6 @@ ${message}
                 WhatsApp Us
               </a>
 
-              {/* Fixed Call Link */}
               <a
                 href={cleanPhone ? `tel:${cleanPhone}` : "#"}
                 className="inline-flex items-center justify-center gap-3 rounded-full border border-[#8B6F86]/30 px-6 py-3 text-sm font-medium text-[#333333] transition hover:border-[#8B6F86] hover:text-[#8B6F86]"
@@ -193,6 +201,46 @@ ${message}
                     placeholder="0800 000 0000"
                     className="mt-1.5 w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 text-sm text-[#333333] placeholder:text-[#333333]/30 outline-none transition focus:border-[#8B6F86]"
                   />
+                </div>
+              </div>
+
+              {/* Preferred Date & Time */}
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <label className="eyebrow !text-[#333333]/50" htmlFor="date">
+                    Preferred Date
+                  </label>
+                  <div className="relative mt-1.5">
+                    <input
+                      id="date"
+                      name="date"
+                      type="date"
+                      min={todayISO}
+                      className="w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 pr-7 text-sm text-[#333333] outline-none transition focus:border-[#8B6F86] [color-scheme:light]"
+                    />
+                    <Calendar
+                      size={15}
+                      className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-[#8B6F86]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="eyebrow !text-[#333333]/50" htmlFor="time">
+                    Preferred Time
+                  </label>
+                  <div className="relative mt-1.5">
+                    <input
+                      id="time"
+                      name="time"
+                      type="time"
+                      className="w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 pr-7 text-sm text-[#333333] outline-none transition focus:border-[#8B6F86] [color-scheme:light]"
+                    />
+                    <Clock
+                      size={15}
+                      className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 text-[#8B6F86]"
+                    />
+                  </div>
                 </div>
               </div>
 
