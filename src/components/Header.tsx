@@ -66,20 +66,18 @@ export default function Header() {
         sibling fixed element, fully outside this transformed header.
       */}
       <header
-        className={`fixed inset-x-0 top-0 z-50 p-4 transition-all duration-500 ease-in-out md:p-4 ${
-          visible || open
+        className={`fixed inset-x-0 top-0 z-50 p-4 transition-all duration-500 ease-in-out md:p-4 ${visible || open
             ? "translate-y-0 opacity-100"
             : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
+          }`}
       >
         {/* Floating Header Capsule */}
         <div
           style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)" }}
-          className={`relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 will-change-transform md:px-6 md:py-3 ${
-            scrolled
+          className={`relative z-50 mx-auto flex max-w-6xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-300 will-change-transform md:px-6 md:py-3 ${scrolled
               ? "border-[#CDB7C8]/40 bg-white/85 shadow-[0_8px_32px_rgba(139,111,134,0.12)] backdrop-blur-xl"
               : "border-[#CDB7C8]/25 bg-white/70 backdrop-blur-md"
-          }`}
+            }`}
         >
           {/* Brand Logo */}
           <Link href="/" className="group flex items-center gap-3">
@@ -136,21 +134,10 @@ export default function Header() {
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
-              onClick={() => setOpen((prev) => !prev)}
-              onTouchEnd={(e) => {
-                // Belt-and-suspenders for iOS Safari: some WebKit versions
-                // drop the synthesized click event for elements nested
-                // inside a backdrop-filter/blur ancestor. Firing the
-                // toggle directly off touchend guarantees the tap is
-                // never lost, while preventDefault stops it from also
-                // firing a delayed/duplicate click afterward.
-                e.preventDefault();
-                setOpen((prev) => !prev);
-              }}
+              onClick={() => setOpen(prev => !prev)}
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              style={{ WebkitTransform: "translateZ(0)", transform: "translateZ(0)" }}
-              className="relative z-50 flex h-10 w-10 cursor-pointer touch-manipulation items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] transition-colors will-change-transform hover:bg-[#8B6F86] hover:text-white active:bg-[#8B6F86] active:text-white md:hidden"
+              className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full bg-[#F6EEF4] text-[#333333] md:hidden"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -165,11 +152,10 @@ export default function Header() {
         viewport on every browser, including iOS Safari.
       */}
       <div
-        className={`fixed inset-0 z-40 flex h-screen w-screen flex-col justify-between bg-white/98 px-5 pb-8 pt-24 backdrop-blur-2xl transition-all duration-300 md:hidden ${
-          open
+        className={`fixed inset-0 z-40 flex h-screen w-screen flex-col justify-between bg-white/98 px-5 pb-8 pt-24 backdrop-blur-2xl transition-all duration-300 md:hidden ${open
             ? "pointer-events-auto opacity-100 translate-y-0"
             : "pointer-events-none opacity-0 -translate-y-4"
-        }`}
+          }`}
       >
         <nav className="flex flex-col gap-4">
           <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#8B6F86]">
