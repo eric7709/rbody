@@ -10,14 +10,15 @@ import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import NewServices from "@/components/NewServices";
-import Header2 from "@/components/Header2";
+import TestPage from "@/components/TestPage";
 
 export default function Home() {
   return (
     <>
-      <Header2 />
+      <Header />
       <main className="flex-1">
         <Hero />
+        <TestPage />
         <About />
         <NewServices />
         <Process />

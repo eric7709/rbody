@@ -24,7 +24,32 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col bg-ivory text-ink">
-        {children}</body>
+        {children}
+        {/* TEMPORARY — mobile debug console, remove once the iOS button bug is fixed */}
+        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      eruda.init();
+
+      function showBanner(text) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:red;color:white;font-size:12px;padding:8px;white-space:pre-wrap;word-break:break-all;max-height:40vh;overflow:auto;';
+        el.textContent = text;
+        document.body.appendChild(el);
+      }
+
+      window.addEventListener('error', function(e) {
+        showBanner('ERROR: ' + e.message + ' | file: ' + e.filename + ' | line: ' + e.lineno + ':' + e.colno + ' | stack: ' + (e.error && e.error.stack));
+      });
+
+      window.addEventListener('unhandledrejection', function(e) {
+        showBanner('REJECTION: ' + e.reason);
+      });
+    `,
+          }}
+        />
+      </body>
     </html>
   );
 }
