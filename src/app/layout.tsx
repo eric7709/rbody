@@ -32,23 +32,20 @@ export default function RootLayout({
             __html: `
       eruda.init();
 
+      function showBanner(text) {
+        var el = document.createElement('div');
+        el.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:red;color:white;font-size:12px;padding:8px;white-space:pre-wrap;word-break:break-all;max-height:40vh;overflow:auto;';
+        el.textContent = text;
+        document.body.appendChild(el);
+      }
+
       window.addEventListener('error', function(e) {
-        console.log('[FULL ERROR] message:', e.message);
-        console.log('[FULL ERROR] filename:', e.filename);
-        console.log('[FULL ERROR] line:', e.lineno, 'col:', e.colno);
-        console.log('[FULL ERROR] stack:', e.error && e.error.stack);
+        showBanner('ERROR: ' + e.message + ' | file: ' + e.filename + ' | line: ' + e.lineno + ':' + e.colno + ' | stack: ' + (e.error && e.error.stack));
       });
 
       window.addEventListener('unhandledrejection', function(e) {
-        console.log('[FULL REJECTION]', e.reason);
+        showBanner('REJECTION: ' + e.reason);
       });
-
-      document.addEventListener('touchstart', function(e){
-        console.log('[debug] touchstart on:', e.target.tagName, e.target.className, 'defaultPrevented:', e.defaultPrevented);
-      }, true);
-      document.addEventListener('click', function(e){
-        console.log('[debug] click on:', e.target.tagName, e.target.className);
-      }, true);
     `,
           }}
         />
