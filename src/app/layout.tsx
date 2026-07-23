@@ -30,14 +30,26 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              eruda.init();
-              document.addEventListener('touchstart', function(e){
-                console.log('[debug] touchstart on:', e.target.tagName, e.target.className, 'defaultPrevented:', e.defaultPrevented);
-              }, true);
-              document.addEventListener('click', function(e){
-                console.log('[debug] click on:', e.target.tagName, e.target.className);
-              }, true);
-            `,
+      eruda.init();
+
+      window.addEventListener('error', function(e) {
+        console.log('[FULL ERROR] message:', e.message);
+        console.log('[FULL ERROR] filename:', e.filename);
+        console.log('[FULL ERROR] line:', e.lineno, 'col:', e.colno);
+        console.log('[FULL ERROR] stack:', e.error && e.error.stack);
+      });
+
+      window.addEventListener('unhandledrejection', function(e) {
+        console.log('[FULL REJECTION]', e.reason);
+      });
+
+      document.addEventListener('touchstart', function(e){
+        console.log('[debug] touchstart on:', e.target.tagName, e.target.className, 'defaultPrevented:', e.defaultPrevented);
+      }, true);
+      document.addEventListener('click', function(e){
+        console.log('[debug] click on:', e.target.tagName, e.target.className);
+      }, true);
+    `,
           }}
         />
       </body>
