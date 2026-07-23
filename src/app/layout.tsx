@@ -23,7 +23,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-ivory text-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-ivory text-ink">
+        {children}
+        {/* TEMPORARY — mobile debug console, remove once the iOS button bug is fixed */}
+        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              eruda.init();
+              document.addEventListener('touchstart', function(e){
+                console.log('[debug] touchstart on:', e.target.tagName, e.target.className, 'defaultPrevented:', e.defaultPrevented);
+              }, true);
+              document.addEventListener('click', function(e){
+                console.log('[debug] click on:', e.target.tagName, e.target.className);
+              }, true);
+            `,
+          }}
+        />
+      </body>
     </html>
   );
 }
