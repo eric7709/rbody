@@ -7,11 +7,11 @@ import { Menu, X, MessageCircle, Calendar, ArrowUpRight } from "lucide-react";
 import { waLink } from "@/lib/content";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Treatments" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#results", label: "Results" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#about", label: "About" },
+  { href: "/#services", label: "Treatments" },
+  { href: "/#gallery", label: "Gallery" },
+  { href: "/#results", label: "Results" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export default function Header() {
@@ -83,7 +83,7 @@ export default function Header() {
           <Link href="/" className="group flex items-center gap-3">
             <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full ring-2 ring-[#CDB7C8]/40 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/images/logo.jpg"
+                src="/logo.jpg"
                 alt="Rbody Logo"
                 fill
                 sizes="36px"

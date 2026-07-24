@@ -1,342 +1,244 @@
-import { MessageCircle, Check, Clock, Calendar, MapPin, Info, Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import {
+  ArrowRight,
+  BadgeCheck,
+  CalendarCheck,
+  Clock3,
+  HeartPulse,
+  MessageCircle,
+} from "lucide-react";
+
 import { waLink } from "@/lib/content";
+import { groupedServices } from "@/lib/services";
+import type { Service } from "@/lib/types";
+
 import SectionWave from "./SectionWave";
-import { Service } from "../lib/types";
-import { services } from "../lib/services";
 
-export default function Services() {
+function bookingMessage(name: string) {
+  return [
+    "Hi Rbody, I'd like to book an appointment for:",
+    name,
+    "",
+    "Please let me know your next available slot.",
+  ].join("\n");
+}
+
+function ServiceCard({
+  service,
+  index,
+}: {
+  service: Service;
+  index: number;
+}) {
+  const dripCount = service.drips?.length ?? 0;
+  const previewDrips = service.drips?.slice(0, 3) ?? [];
+  const remainingDrips = dripCount - previewDrips.length;
+  const previewBenefits =
+    dripCount > 0 ? [] : service.benefits?.slice(0, 2) ?? [];
+
   return (
-    <section id="services" className="relative bg-[#F8EDEF] py-20 md:py-28">
-      <SectionWave tone="white" flip />
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[#8B6F86]/10 bg-white shadow-sm shadow-[#8B6F86]/5 transition-all duration-300 hover:-translate-y-1 hover:border-[#8B6F86]/25 hover:shadow-xl hover:shadow-[#8B6F86]/10">
+      {/* Soft corner accent */}
+      <div
+        aria-hidden="true"
+        className="absolute right-0 top-0 h-28 w-28 rounded-bl-full bg-[#CDB7C8]/25 transition-transform duration-500 group-hover:scale-110"
+      />
 
-      <div className="mx-auto max-w-6xl pt-10 px-4">
-        {/* Header Section */}
-        <div className="mx-auto max-w-2xl text-center">
-            <span className="text-[11px] font-medium uppercase tracking-widest text-black">
-              Our Offerings
+      <div className="relative flex h-full flex-col p-5 sm:p-6">
+        {/* Card header */}
+        <div className="mb-6 flex items-start justify-between gap-4">
+          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#F8EDEF] font-mono text-xs font-semibold text-[#8B6F86]">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          {service.price ? (
+            <span className="max-w-[11rem] rounded-full bg-[#8B6F86]/10 px-3 py-1 text-right text-xs font-medium leading-snug tabular-nums text-[#8B6F86]">
+              {service.price}
             </span>
-          <h2 className="mt-6 font-display text-3xl font-medium leading-tight text-[#333333] sm:text-4xl">
-            Tailored Treatments & <br className="hidden sm:block" />
-            <span className="text-[#8B6F86]">Luxury Care</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#333333]/70">
-            Designed to enhance your natural beauty, support your recovery, and
-            elevate your wellness journey from the inside out.
-          </p>
+          ) : dripCount > 0 ? (
+            <span className="rounded-full bg-[#8B6F86]/10 px-3 py-1 text-xs font-medium text-[#8B6F86]">
+              {dripCount} IV drips
+            </span>
+          ) : null}
         </div>
 
-        {/* Services List Grid */}
-        <div className="mt-16  space-y-6">
-          {services.map((service: Service, i: number) => (
-            <div
-              key={service.slug}
-              className="group relative overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:shadow-md border border-[#CDB7C8]/20"
-            >
-              {/* Subtle accent gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#F8EDEF]/0 via-[#F8EDEF]/0 to-[#F8EDEF]/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        {/* Main content */}
+        <div>
+          <h3 className="font-display text-xl font-medium leading-tight text-[#333333] transition-colors group-hover:text-[#8B6F86] sm:text-2xl">
+            {service.name}
+          </h3>
 
-              <div className="relative p-6 md:p-10">
-                {/* Main Service Card Header */}
-                <div className="grid gap-6 md:grid-cols-[1fr_auto]">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F8EDEF] font-display text-sm font-semibold text-[#8B6F86]">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div>
-                        <h3 className="font-display text-2xl font-medium text-[#333333] group-hover:text-[#8B6F86] transition-colors">
-                          {service.name}
-                        </h3>
-                        {service.price && (
-                          <span className="inline-block mt-1 text-sm font-medium text-[#8B6F86]">
-                            {service.price}
-                          </span>
-                        )}
-                      </div>
-                    </div>
+          <p className="mt-3 line-clamp-3 text-sm leading-7 text-[#333333]/65">
+            {service.description}
+          </p>
 
-                    <p className="text-sm leading-relaxed text-[#333333]/80">
-                      {service.description}
-                    </p>
+          {/* Treatment facts */}
+          <div className="mt-5 space-y-2.5 rounded-2xl bg-[#F8EDEF]/35 p-4">
+            {service.treatmentTime && (
+              <div className="flex items-center gap-2.5 text-xs leading-relaxed text-[#333333]/60">
+                <Clock3 size={14} className="shrink-0 text-[#8B6F86]" />
+                <span>{service.treatmentTime}</span>
+              </div>
+            )}
 
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F8EDEF] px-3 py-1 text-xs font-medium text-[#333333]">
-                        <Info size={12} className="text-[#8B6F86]" />
-                        Best for: {service.bestFor}
-                      </span>
-                      {service.note && (
-                        <span className="inline-flex items-center gap-1.5 text-xs text-[#333333]/60">
-                          <Info size={12} className="text-[#8B6F86]" />
-                          {service.note}
-                        </span>
-                      )}
-                    </div>
-                  </div>
+            {service.recommendedSessions && (
+              <div className="flex items-center gap-2.5 text-xs leading-relaxed text-[#333333]/60">
+                <CalendarCheck size={14} className="shrink-0 text-[#8B6F86]" />
+                <span className="line-clamp-1">
+                  {service.recommendedSessions}
+                </span>
+              </div>
+            )}
 
-                  {/* Primary CTA */}
-                  <div className="flex flex-col items-start justify-center gap-4 border-t border-[#CDB7C8]/20 pt-4 md:items-end md:border-t-0 md:pt-0">
-                    <a
-                      href={waLink(
-                        `Hi Rbody, I'd like to inquire about ${service.name}.`
-                      )}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group/btn inline-flex items-center gap-2 rounded-full bg-[#8B6F86] px-6 py-3 text-sm font-medium text-white shadow-sm transition-all hover:bg-[#8B6F86]/90 hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      <MessageCircle size={16} className="transition-transform group-hover/btn:scale-110" /> 
-                      Book Service
-                      <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1" />
-                    </a>
-                  </div>
-                </div>
+            {service.bestFor && (
+              <div className="flex items-center gap-2.5 text-xs leading-relaxed text-[#333333]/60">
+                <HeartPulse size={14} className="shrink-0 text-[#8B6F86]" />
+                <span className="line-clamp-1">{service.bestFor}</span>
+              </div>
+            )}
+          </div>
 
-                {/* General Metadata Details */}
-                {(service.treatmentTime ||
-                  service.recommendedSessions ||
-                  service.minimumStay) && (
-                  <div className="mt-6 flex flex-wrap items-center gap-4 border-t border-[#CDB7C8]/20 pt-5 text-xs text-[#333333]/70">
-                    {service.treatmentTime && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F8EDEF]/50 px-3 py-1">
-                        <Clock size={14} className="text-[#8B6F86]" />
-                        {service.treatmentTime}
-                      </span>
-                    )}
-                    {service.recommendedSessions && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F8EDEF]/50 px-3 py-1">
-                        <Calendar size={14} className="text-[#8B6F86]" />
-                        {service.recommendedSessions}
-                      </span>
-                    )}
-                    {service.minimumStay && (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F8EDEF]/50 px-3 py-1">
-                        <MapPin size={14} className="text-[#8B6F86]" />
-                        {service.minimumStay}
-                      </span>
-                    )}
-                  </div>
-                )}
+          {/* IV Therapy compact menu preview */}
+          {dripCount > 0 && (
+            <div className="mt-5">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-[#8B6F86]/70">
+                  IV Menu
+                </p>
 
-                {/* Key Benefits List */}
-                {service.benefits && service.benefits.length > 0 && (
-                  <div className="mt-6">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-[#8B6F86]">
-                      Key Benefits
-                    </h4>
-                    <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                      {service.benefits.map((benefit, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2 text-xs text-[#333333]/80"
-                        >
-                          <Check size={14} className="mt-0.5 shrink-0 text-[#8B6F86]" />
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <span className="text-xs font-medium text-[#333333]/45">
+                  {dripCount} available
+                </span>
+              </div>
 
-                {/* Included Items */}
-                {service.included && (
-                  <div className="mt-6 rounded-xl bg-gradient-to-br from-[#F8EDEF]/60 to-white p-5 border border-[#CDB7C8]/20">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-[#8B6F86]">
-                      What's Included
-                    </h4>
-                    <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-                      {service.included.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center gap-2 text-xs text-[#333333]/80"
-                        >
-                          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#8B6F86]" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+              <div className="flex flex-wrap gap-2">
+                {previewDrips.map((drip) => (
+                  <span
+                    key={drip.slug}
+                    className="rounded-full border border-[#8B6F86]/15 bg-white px-3 py-1 text-xs text-[#333333]/60"
+                  >
+                    {drip.name}
+                  </span>
+                ))}
 
-                {/* Treatment Areas */}
-                {service.treatmentAreas && (
-                  <div className="mt-6">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-[#8B6F86]">
-                      Treatment Areas
-                    </h4>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {service.treatmentAreas.map((area, idx) => (
-                        <span
-                          key={idx}
-                          className="rounded-full bg-[#F8EDEF] px-3 py-1 text-xs font-medium text-[#333333] hover:bg-[#8B6F86] hover:text-white transition-colors cursor-default"
-                        >
-                          {area}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Nested IV Drips */}
-                {service.drips && (
-                  <div className="mt-8 border-t border-[#CDB7C8]/20 pt-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-[#8B6F86]">
-                        Available IV Infusions
-                      </h4>
-                      <span className="text-[10px] text-[#333333]/40">
-                        {service.drips.length} options
-                      </span>
-                    </div>
-                    
-                    <div className="space-y-6">
-                      {service.drips.map((drip, idx) => (
-                        <div
-                          key={drip.slug}
-                          className="group/drip rounded-xl bg-[#F8EDEF]/30 p-5 transition-all hover:bg-[#F8EDEF]/60 border border-[#CDB7C8]/10"
-                        >
-                          <div className="grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-start">
-                            {/* Number and Name */}
-                            <div className="flex items-start gap-3 md:flex-col md:items-center">
-                              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-xs font-semibold text-[#8B6F86] shadow-sm">
-                                {String(idx + 1).padStart(2, "0")}
-                              </span>
-                              <div className="md:text-center">
-                                <h5 className="font-display text-lg font-medium text-[#333333]">
-                                  {drip.name}
-                                </h5>
-                                <span className="text-sm font-semibold text-[#8B6F86]">
-                                  ₦{drip.price.toLocaleString("en-NG")}
-                                </span>
-                              </div>
-                            </div>
-
-                            {/* Description and Benefits */}
-                            <div className="space-y-2">
-                              <p className="text-xs text-[#333333]/70">
-                                <span className="font-medium text-[#333333]">Best for:</span> {drip.bestFor}
-                              </p>
-                              <p className="text-xs leading-relaxed text-[#333333]/60">
-                                {drip.description}
-                              </p>
-                              {drip.note && (
-                                <p className="text-[11px] italic text-[#333333]/40">
-                                  {drip.note}
-                                </p>
-                              )}
-                              <div className="flex flex-wrap gap-1.5 pt-1">
-                                {drip.benefits.slice(0, 3).map((b) => (
-                                  <span key={b} className="text-[10px] text-[#333333]/50 bg-white/60 px-2 py-0.5 rounded-full">
-                                    {b}
-                                  </span>
-                                ))}
-                                {drip.benefits.length > 3 && (
-                                  <span className="text-[10px] text-[#8B6F86]/60">
-                                    +{drip.benefits.length - 3} more
-                                  </span>
-                                )}
-                              </div>
-                              {drip.treatmentTime && (
-                                <span className="inline-flex items-center gap-1 text-[11px] text-[#333333]/40">
-                                  <Clock size={12} />
-                                  {drip.treatmentTime}
-                                </span>
-                              )}
-                            </div>
-
-                            {/* CTA */}
-                            <div className="flex items-center gap-3 md:flex-col md:items-end">
-                              <a
-                                href={waLink(
-                                  `Hi Rbody, I'd like to book the ${drip.name}.`
-                                )}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="inline-flex h-fit w-full items-center justify-center gap-2 rounded-full border-2 border-[#8B6F86]/20 px-4 py-2 text-xs font-medium text-[#333333] transition-all hover:border-[#8B6F86] hover:bg-[#8B6F86] hover:text-white md:w-auto"
-                              >
-                                <MessageCircle size={14} /> 
-                                <span className="hidden sm:inline">Book Now</span>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Lymphatic Detail */}
-                {service.lymphaticDetail && (
-                  <div className="mt-8 rounded-xl bg-gradient-to-br from-[#F8EDEF]/60 to-white p-6 border border-[#CDB7C8]/20">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <p className="text-xs font-semibold uppercase tracking-widest text-[#8B6F86]">
-                            {service.lymphaticDetail.eyebrow}
-                          </p>
-                          <h4 className="mt-1 font-display text-2xl font-medium text-[#333333]">
-                            {service.lymphaticDetail.title}
-                          </h4>
-                          <p className="text-sm font-medium italic text-[#8B6F86]">
-                            "{service.lymphaticDetail.strapline}"
-                          </p>
-                        </div>
-                        <Sparkles size={24} className="text-[#8B6F86]/40" />
-                      </div>
-
-                      <p className="text-sm leading-relaxed text-[#333333]/80">
-                        {service.lymphaticDetail.intro}
-                      </p>
-
-                      {/* Who it's for */}
-                      <div>
-                        <span className="text-xs font-semibold text-[#333333]">
-                          Ideal for:
-                        </span>
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {service.lymphaticDetail.who.map((w, idx) => (
-                            <span
-                              key={idx}
-                              className="rounded-full bg-white px-3 py-1 text-xs font-medium text-[#8B6F86] shadow-sm"
-                            >
-                              {w}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* What to expect */}
-                      <div>
-                        <h5 className="text-xs font-semibold uppercase tracking-wider text-[#8B6F86]">
-                          What to Expect
-                        </h5>
-                        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                          {service.lymphaticDetail.expect.map((item, idx) => (
-                            <div
-                              key={idx}
-                              className="rounded-lg bg-white p-4 shadow-sm border border-[#CDB7C8]/10 transition-all hover:shadow-md hover:border-[#CDB7C8]/30"
-                            >
-                              <span className="text-xs font-semibold text-[#8B6F86]">
-                                {item.step}
-                              </span>
-                              <p className="mt-1 text-xs text-[#333333]/70 leading-relaxed">
-                                {item.detail}
-                              </p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Why choose */}
-                      <div className="rounded-lg bg-white/60 p-4 border border-[#CDB7C8]/10">
-                        <p className="text-xs italic leading-relaxed text-[#333333]/70">
-                          {service.lymphaticDetail.why}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                {remainingDrips > 0 && (
+                  <span className="rounded-full bg-[#8B6F86]/10 px-3 py-1 text-xs font-medium text-[#8B6F86]">
+                    +{remainingDrips} more
+                  </span>
                 )}
               </div>
             </div>
+          )}
+
+          {/* Normal service benefits */}
+          {previewBenefits.length > 0 && (
+            <ul className="mt-5 space-y-2.5">
+              {previewBenefits.map((benefit, benefitIndex) => (
+                <li
+                  key={benefitIndex}
+                  className="flex items-start gap-2.5 text-xs leading-relaxed text-[#333333]/60"
+                >
+                  <BadgeCheck
+                    size={14}
+                    className="mt-0.5 shrink-0 text-[#8B6F86]"
+                  />
+                  <span>{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Card buttons pinned to bottom */}
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-[#8B6F86]/10 pt-5">
+          <Link
+            href={`/treatments/${service.slug}`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-[#8B6F86] underline decoration-[#8B6F86]/30 underline-offset-4 transition-all hover:gap-2.5 hover:decoration-[#8B6F86]"
+          >
+            {dripCount > 0 ? "View IV menu" : "See details"}
+            <ArrowRight size={14} />
+          </Link>
+
+          <a
+            href={waLink(bookingMessage(service.name))}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full bg-[#8B6F86] px-5 text-sm font-medium text-white shadow-sm shadow-[#8B6F86]/20 transition-colors hover:bg-[#7A5F75] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6F86]"
+          >
+            <MessageCircle size={14} />
+            Book
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+export default function Services() {
+  return (
+    <section
+      id="services"
+      className="relative isolate overflow-hidden bg-[#F8EDEF] pb-20 pt-28 sm:pb-24 sm:pt-32 md:pb-28 md:pt-40"
+    >
+      <SectionWave tone="white" flip />
+
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_16%,rgba(255,255,255,0.9),transparent_30%),radial-gradient(circle_at_88%_8%,rgba(139,111,134,0.09),transparent_26%)]"
+      />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        {/* Header */}
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <p className="eyebrow mb-3 text-[#8B6F86]">Our Offerings</p>
+
+          <h2 className="font-display text-3xl leading-tight text-[#333333] sm:text-4xl">
+            Tailored treatments for your body’s real recovery process
+          </h2>
+
+          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-[#8B6F86]/30" />
+        </div>
+
+        {/* Services grid */}
+        <div className="grid items-stretch gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {groupedServices.map((service, index) => (
+            <ServiceCard key={service.slug} service={service} index={index} />
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mx-auto mt-16 max-w-3xl text-center">
+          <p className="font-display text-2xl leading-tight text-[#333333] sm:text-3xl">
+            Not sure where to start?
+          </p>
+
+          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#333333]/70">
+            Tell us what you’re working towards — post-op recovery, body
+            sculpting, wellness, skin glow or weight-loss support — and we’ll
+            guide you to the right treatment plan.
+          </p>
+
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={waLink(
+                "Hi Rbody, I'd like help choosing the right treatment."
+              )}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#8B6F86] px-6 text-sm font-medium text-white shadow-sm shadow-[#8B6F86]/20 transition-colors hover:bg-[#7A5F75] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6F86]"
+            >
+              <MessageCircle size={15} />
+              Ask on WhatsApp
+            </a>
+
+            <Link
+              href="/#contact"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-[#8B6F86]/25 bg-white/70 px-6 text-sm font-medium text-[#8B6F86] transition-colors hover:border-[#8B6F86]/45 hover:bg-white"
+            >
+              Book a consultation
+              <ArrowRight size={14} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

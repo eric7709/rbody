@@ -254,17 +254,19 @@ export const process = [
 ];
 
 export const galleryItems = [
-  { label: "Clinic Entrance", icon: "door" },
-  { label: "Massage Session", icon: "hand" },
-  { label: "Treatment Room", icon: "sofa" },
+  { label: "Clinic Entrance", icon: "door", img: "/gallery1.jpeg"},
+  { label: "Massage Session", icon: "hand", img: "/gallery2.jpg"},
+  { label: "Treatment Room", icon: "sofa", img: "/gallery3.jpeg"},
   {
     label: "Client Session",
     icon: "camera",
+    img: "/gallery4.jpeg"
   },
-  { label: "IV Therapy Setup", icon: "droplet" },
+  { label: "IV Therapy Setup", icon: "droplet", img: "/gallery5.jpeg" },
   {
     label: "Process Video",
     icon: "video",
+    img: "/gallery1.jpeg"
   },
 ] as const;
 

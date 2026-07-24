@@ -4,7 +4,7 @@ export const services: Service[] = [
   {
     slug: "lymphatic-drainage-massage",
     name: "Lymphatic Drainage Massage",
-    price: "₦70,000 per session",
+    price: "₦50,000 per session",
     bestFor: "Post-operative recovery, bloating, fluid retention, and general lymphatic wellness.",
     description: "Recover, heal, and feel your best with our specialized lymphatic drainage massage. Whether you’re recovering from cosmetic surgery, a C-section, or experiencing bloating and fluid retention, this gentle treatment helps reduce swelling, improve circulation, encourage natural lymphatic drainage, and support a smoother, more comfortable recovery.",
     benefits: [
@@ -29,6 +29,8 @@ export const services: Service[] = [
     name: "Luxury Post-Op Care",
     bestFor: "Clients recovering from cosmetic surgery who want professional care in a safe, comfortable, and supportive environment.",
     description: "Our Luxury Post-Op Care program redefines the recovery experience, offering world-class care in a serene, private setting. We understand that recovery from cosmetic surgery is just as important as the procedure itself, which is why we've created an environment that promotes optimal healing while ensuring your comfort and peace of mind. Our dedicated team of experienced nurses and healthcare professionals provides round-the-clock care, monitoring your recovery progress and ensuring you heal safely and comfortably. We combine medical excellence with five-star hospitality, offering personalized attention, gourmet meals, and premium amenities that transform your recovery from a necessity into a rejuvenating experience.",
+    price: "₦150,000 per day",
+
     benefits: [
       "Supports a smoother, more comfortable recovery process",
       "Helps reduce swelling and fluid retention with professional lymphatic drainage",
@@ -282,16 +284,56 @@ export const services: Service[] = [
   }
 ];
 
-export const serviceTitles: string[] = [
-  "Lipolysis",
-  "RBody Signature Sculpt Program",
-  "Body Sculpting",
-  "Luxury Post-Op Care",
-  "Botox",
-  "Lymphatic Drainage Massage",
-  "Lumi Radiance Drip",
-  "Smokers Recovery Drip",
-  "Skin Repair Booster",
-  "Bridal Glow Drip",
-  "Vitamin C Immune Boost",
-];
+/**
+ * Every bookable name in the catalog — top-level services AND their
+ * individual drips — derived directly from `services` rather than
+ * hand-typed. This is what search/autocomplete components should read
+ * from, so a treatment (or a drip) can never silently go missing from
+ * a list again just because someone forgot to type its name somewhere.
+ */
+export const serviceTitles: string[] = services.flatMap((service) => [
+  service.name,
+  ...(service.drips?.map((drip) => drip.name) ?? []),
+]);
+
+/**
+ * One entry per top-level service (never expands drips) — use this for
+ * "all treatments" grids/nav where IV Therapy should appear as a single
+ * grouped card, not five separate ones.
+ */
+export const groupedServices: Service[] = services;
+
+/**
+ * A flat, bookable listing: a service WITHOUT its own drips stays as one
+ * row, but a service that has drips (like IV Therapy) is replaced by one
+ * row per drip. Use this wherever every individually bookable item needs
+ * its own entry — a booking dropdown, a search index, etc.
+ */
+export interface BookableListing {
+  slug: string;
+  name: string;
+  /** Route to the page where this item can actually be booked. */
+  href: string;
+  price?: string | number;
+}
+
+export const bookableListings: BookableListing[] = services.flatMap(
+  (service): BookableListing[] => {
+    if (service.drips && service.drips.length > 0) {
+      return service.drips.map((drip) => ({
+        slug: drip.slug,
+        name: drip.name,
+        href: `/treatments/${service.slug}#${drip.slug}`,
+        price: drip.price,
+      }));
+    }
+    return [
+      {
+        slug: service.slug,
+        name: service.name,
+        href: `/treatments/${service.slug}`,
+        price: service.price,
+      },
+    ];
+  }
+);

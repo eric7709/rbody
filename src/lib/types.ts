@@ -1,3 +1,9 @@
+/**
+ * A single IV infusion offered under the "IV Therapy" service.
+ * Drips are variants of one treatment (same delivery method, same
+ * location on the body) rather than standalone services, so they live
+ * nested under their parent Service rather than as top-level entries.
+ */
 export interface IVDrip {
   slug: string;
   name: string;
@@ -14,6 +20,7 @@ export interface ExpectationStep {
   detail: string;
 }
 
+/** The deep-dive block specific to Lymphatic Drainage Massage. */
 export interface LymphaticDetail {
   eyebrow: string;
   title: string;
@@ -30,10 +37,11 @@ export interface ProcessStep {
   title: string;
   detail: string;
 }
+
 export interface Service {
   slug: string;
   name: string;
-  price?: string; // Add this line
+  price?: string;
   bestFor: string;
   description: string;
   benefits: string[];
@@ -43,6 +51,7 @@ export interface Service {
   minimumStay?: string;
   treatmentAreas?: string[];
   note?: string;
+  /** Only present on services (like IV Therapy) with individually bookable variants. */
   drips?: IVDrip[];
   lymphaticDetail?: LymphaticDetail;
   process?: ProcessStep[];

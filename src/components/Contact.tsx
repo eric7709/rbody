@@ -34,28 +34,30 @@ export default function Contact() {
     const form = new FormData(e.currentTarget);
 
     const name = form.get("name")?.toString() || "";
-    const phone = form.get("phone")?.toString() || "";
     const treatment = selectedTreatment;
     const date = form.get("date")?.toString() || "";
     const time = form.get("time")?.toString() || "";
-    const message = form.get("message")?.toString() || "";
+    const message = form.get("message")?.toString().trim() || "";
 
-    const preferredDateTime =
-      date || time
-        ? `${date ? new Date(date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) : ""}${date && time ? " at " : ""}${time || ""}`
-        : "No preference";
+    const formattedDate = date
+      ? new Date(date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+      : "—";
 
-    const text = `
-Hi Rbody, I'd like to book a consultation.
-
-Name: ${name}
-Phone: ${phone}
-Treatment: ${treatment}
-Preferred Date/Time: ${preferredDateTime}
-
-Message:
-${message}
-`.trim();
+    const text =
+      "NEW CONSULTATION REQUEST\n" +
+      "\n" +
+      "Name: " + name + "\n" +
+      "\n" +
+      "Date: " + formattedDate + "\n" +
+      "\n" +
+      "Time: " + time + "\n" +
+      "\n" +
+      "Treatment: " + treatment +
+      (message ? "\n\nMessage: " + message : "");
 
     window.open(waLink(text), "_blank", "noopener,noreferrer");
   }
@@ -174,34 +176,18 @@ ${message}
             </div>
 
             <div className="mt-6 grid gap-5">
-              <div className="grid gap-5 md:grid-cols-2">
-                <div>
-                  <label className="eyebrow !text-[#333333]/50" htmlFor="name">
-                    Full Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    className="mt-1.5 w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 text-sm text-[#333333] placeholder:text-[#333333]/30 outline-none transition focus:border-[#8B6F86]"
-                  />
-                </div>
-
-                <div>
-                  <label className="eyebrow !text-[#333333]/50" htmlFor="phone">
-                    Phone Number
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    placeholder="0800 000 0000"
-                    className="mt-1.5 w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 text-sm text-[#333333] placeholder:text-[#333333]/30 outline-none transition focus:border-[#8B6F86]"
-                  />
-                </div>
+              <div>
+                <label className="eyebrow !text-[#333333]/50" htmlFor="name">
+                  Full Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Your name"
+                  className="mt-1.5 w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 text-sm text-[#333333] placeholder:text-[#333333]/30 outline-none transition focus:border-[#8B6F86]"
+                />
               </div>
 
               {/* Preferred Date & Time */}
@@ -215,6 +201,7 @@ ${message}
                       id="date"
                       name="date"
                       type="date"
+                      required
                       min={todayISO}
                       className="w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 pr-7 text-sm text-[#333333] outline-none transition focus:border-[#8B6F86] [color-scheme:light]"
                     />
@@ -234,6 +221,7 @@ ${message}
                       id="time"
                       name="time"
                       type="time"
+                      required
                       className="w-full border-b border-[#CDB7C8]/60 bg-transparent px-0 py-2.5 pr-7 text-sm text-[#333333] outline-none transition focus:border-[#8B6F86] [color-scheme:light]"
                     />
                     <Clock
@@ -258,9 +246,8 @@ ${message}
                   <span className="truncate">{selectedTreatment}</span>
                   <ChevronDown
                     size={16}
-                    className={`text-[#8B6F86] transition-transform duration-200 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`text-[#8B6F86] transition-transform duration-200 ${isOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -281,11 +268,10 @@ ${message}
                                   setSelectedTreatment(drip.name);
                                   setIsOpen(false);
                                 }}
-                                className={`flex w-full items-center justify-between px-6 py-2 text-left text-sm transition hover:bg-[#F8EDEF]/50 ${
-                                  selectedTreatment === drip.name
-                                    ? "font-medium text-[#8B6F86]"
-                                    : "text-[#333333]/80"
-                                }`}
+                                className={`flex w-full items-center justify-between px-6 py-2 text-left text-sm transition hover:bg-[#F8EDEF]/50 ${selectedTreatment === drip.name
+                                  ? "font-medium text-[#8B6F86]"
+                                  : "text-[#333333]/80"
+                                  }`}
                               >
                                 <span>{drip.name}</span>
                                 {selectedTreatment === drip.name && (
@@ -305,11 +291,10 @@ ${message}
                             setSelectedTreatment(service.name);
                             setIsOpen(false);
                           }}
-                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition hover:bg-[#F8EDEF]/50 ${
-                            selectedTreatment === service.name
-                              ? "font-medium text-[#8B6F86]"
-                              : "text-[#333333]"
-                          }`}
+                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition hover:bg-[#F8EDEF]/50 ${selectedTreatment === service.name
+                            ? "font-medium text-[#8B6F86]"
+                            : "text-[#333333]"
+                            }`}
                         >
                           <span>{service.name}</span>
                           {selectedTreatment === service.name && (
