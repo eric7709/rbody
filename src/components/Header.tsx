@@ -157,7 +157,7 @@ export default function Header() {
             : "pointer-events-none opacity-0 -translate-y-4"
           }`}
       >
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col gap-3">
           <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#8B6F86]">
             Navigation
           </p>
@@ -166,10 +166,10 @@ export default function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between border-b border-[#CDB7C8]/15 pb-3 text-2xl font-display text-[#333333] transition-colors active:text-[#8B6F86]"
+              className="flex items-center justify-between border-b border-[#CDB7C8]/15 pb-2.5 text-xl font-display text-[#333333] transition-colors active:text-[#8B6F86]"
             >
               <span>{link.label}</span>
-              <ArrowUpRight size={20} className="text-[#8B6F86]" />
+              <ArrowUpRight size={18} className="text-[#8B6F86]" />
             </Link>
           ))}
         </nav>
