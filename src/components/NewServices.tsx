@@ -187,7 +187,7 @@ export default function Services() {
         className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_16%,rgba(255,255,255,0.9),transparent_30%),radial-gradient(circle_at_88%_8%,rgba(139,111,134,0.09),transparent_26%)]"
       />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-6xl px-4 pt-10 sm:px-6">
         {/* Header */}
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <p className="eyebrow mb-3 text-[#8B6F86]">Our Offerings</p>

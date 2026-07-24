@@ -1,38 +1,46 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 const images = [
-  '/gallery1.jpeg',
-  '/gallery2.jpg',
-  '/gallery3.jpeg',
-  '/gallery4.jpeg',
-  '/gallery5.jpeg',
+  "/gallery1.jpeg",
+  "/gallery2.jpg",
+  "/gallery3.jpeg",
+  "/gallery4.jpeg",
+  "/gallery5.jpeg",
 ];
 
-// Edit these to whatever captions you want under each photo
 const labels = [
-  'RBody Office',
-  'Waiting Room',
-  'Treatment Room',
-  'Queens Bed ',
-  'Queens Bed (Double)',
+  "RBody Office",
+  "Waiting Room",
+  "Treatment Room",
+  "Queens Bed",
+  "Queens Bed Double",
 ];
 
-function Photo({ index, className = '' }: { index: number; className?: string }) {
+function Photo({
+  index,
+  className = "",
+}: {
+  index: number;
+  className?: string;
+}) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <div className="relative flex-1 overflow-hidden rounded-lg">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-auto md:flex-1">
         <Image
           src={images[index]}
           alt={labels[index]}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover"
+          className="object-cover transition-transform duration-500 hover:scale-105"
           priority={index === 0}
         />
       </div>
-      <div className="p-3 text-center bg-gray-800 rounded-xl">
-        <span className="text-center text-sm text-gray-100 font-semibold text-">{labels[index]}</span>
+
+      <div className="rounded-xl bg-gray-800 px-4 py-3 text-center">
+        <span className="text-sm font-semibold text-gray-100">
+          {labels[index]}
+        </span>
       </div>
     </div>
   );
@@ -40,14 +48,26 @@ function Photo({ index, className = '' }: { index: number; className?: string })
 
 export default function Gallery() {
   return (
-    <div className="p-8">
-      <div className="grid grid-cols-3 gap-4 w-full max-w-[1120px] mx-auto h-[690px]">
-        <Photo index={0} className="col-span-2 row-span-2" />
-        <Photo index={1} className="row-span-2" />
-        <Photo index={2} />
-        <Photo index={3} />
-        <Photo index={4} />
+    <section className="bg-white px-4 py-12 sm:px-6 md:py-20">
+      <div className="mx-auto max-w-[1120px]">
+        <div className="mb-10 text-center">
+          <p className="eyebrow mb-3 text-[#8B6F86]">Gallery</p>
+
+          <h2 className="font-display text-3xl leading-tight text-[#333333] sm:text-4xl">
+            Inside RBody Clinic
+          </h2>
+
+          <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-[#8B6F86]/30" />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:h-[690px] md:grid-cols-3 md:grid-rows-3">
+          <Photo index={0} className="md:col-span-2 md:row-span-2" />
+          <Photo index={1} className="md:row-span-2" />
+          <Photo index={2} />
+          <Photo index={3} />
+          <Photo index={4} />
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
