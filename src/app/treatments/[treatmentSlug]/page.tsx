@@ -146,7 +146,7 @@ export default async function TreatmentPage({
         }
       `}</style>
 
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-6xl px-5 pt-10 sm:px-8">
         {/* Navigation */}
         <Link
           href="/#services"

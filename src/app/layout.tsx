@@ -10,12 +10,9 @@ import "@fontsource/work-sans/600.css";
 import "@fontsource/work-sans/700.css";
 import "./globals.css";
 import Header from "@/components/Header";
+import { clinicSchema, defaultMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Rbody Clinic — Lagos Recovery & Body Clinic",
-  description:
-    "Rbody is a specialist clinic for lymphatic drainage massage, post-surgical recovery care, body sculpting, lipolysis, IV therapy and medical weight-loss support in Lagos.",
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -24,6 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(clinicSchema) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-ivory text-ink">
         <Header />
         {children}
