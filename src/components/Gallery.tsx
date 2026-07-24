@@ -25,22 +25,26 @@ function Photo({
   className?: string;
 }) {
   return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:aspect-auto md:flex-1">
+    <div className={`relative overflow-hidden rounded-2xl ${className}`}>
+      <div className="relative aspect-[4/3] w-full md:aspect-auto md:h-full">
         <Image
           src={images[index]}
           alt={labels[index]}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover transition-transform duration-500 hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
           priority={index === 0}
         />
-      </div>
-
-      <div className="rounded-xl bg-gray-800 px-4 py-3 text-center">
-        <span className="text-sm font-semibold text-gray-100">
-          {labels[index]}
-        </span>
+        
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        
+        {/* Text overlay at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+          <span className="text-sm font-semibold text-white drop-shadow-lg md:text-base">
+            {labels[index]}
+          </span>
+        </div>
       </div>
     </div>
   );
