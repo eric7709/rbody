@@ -94,9 +94,9 @@ export default function Hero() {
       `}</style>
 
       <div className="relative mx-auto max-w-6xl px-6 pb-24 pt-16 md:pt-24">
-        <div className="grid gap-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="grid gap-8 lg:gap-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           {/* Left column — copy with ONLY "written plan" in 3D */}
-          <div>
+          <div className="order-2 lg:order-1">
             <p className="mb-6 font-mono text-[0.7rem] uppercase tracking-[0.25em] text-[#8B6F86]">
               Recovery notes — Lagos, NG
             </p>
@@ -138,8 +138,8 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Recovery-phase strip */}
-            <ol className="mt-12 flex flex-col divide-y divide-[#CDB7C8]/30 border-y border-[#CDB7C8]/30 sm:flex-row sm:divide-x sm:divide-y-0">
+            {/* Recovery-phase strip — hidden on mobile, shown on desktop */}
+            <ol className="mt-12 hidden lg:flex flex-col divide-y divide-[#CDB7C8]/30 border-y border-[#CDB7C8]/30 sm:flex-row sm:divide-x sm:divide-y-0">
               {PHASES.map((phase) => (
                 <li key={phase.mark} className="flex-1 py-4 sm:px-5 sm:py-3">
                   <p className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[#8B6F86]">
@@ -152,7 +152,7 @@ export default function Hero() {
           </div>
 
           {/* Right column — the porthole */}
-          <div className="relative mx-auto flex w-full max-w-xl items-center justify-center py-6 lg:-translate-y-10">
+          <div className="order-1 lg:order-2 relative mx-auto flex w-full max-w-xl items-center justify-center py-6 lg:-translate-y-10">
             {/* Pulse line */}
             <svg
               aria-hidden="true"
@@ -206,6 +206,18 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
+          {/* Recovery-phase strip — mobile only, shown after image */}
+          <ol className="order-3 mt-4 flex flex-col divide-y divide-[#CDB7C8]/30 border-y border-[#CDB7C8]/30 lg:hidden sm:flex-row sm:divide-x sm:divide-y-0">
+            {PHASES.map((phase) => (
+              <li key={phase.mark} className="flex-1 py-4 sm:px-5 sm:py-3">
+                <p className="font-mono text-[0.65rem] uppercase tracking-[0.15em] text-[#8B6F86]">
+                  {phase.mark}
+                </p>
+                <p className="mt-1 text-sm text-[#333333]/70">{phase.label}</p>
+              </li>
+            ))}
+          </ol>
         </div>
 
         {/* Trust markers */}
